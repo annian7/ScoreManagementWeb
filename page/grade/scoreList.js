@@ -46,7 +46,7 @@ layui.use(['laydate','form','layer','table','laytpl'],function(){
         id : "teacListTable",
         cols : [[
             {field: 'id', title: '学号', minWidth:100, align:"center",templet: function(d){
-                return d.id
+                return d.student.id
             }},
             {field: 'name', title: '姓名', minWidth:100, align:"center",templet: function(d){
                 return d.student.name
