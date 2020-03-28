@@ -39,7 +39,6 @@ layui.use(['form','layer','jquery'],function(){
                 alert(XMLHttpRequest.status);
                 alert(XMLHttpRequest.readyState);
                 alert(textStatus);
-                $(this).text("登录");
             }
         });
         return false;

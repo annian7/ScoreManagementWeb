@@ -114,7 +114,19 @@ h2.method{ font-size:18px; line-height:45px; padding-left:5px;}
 .loginBody .seraph.icon-wechat:hover{ color:#00d20d;}
 .loginBody .seraph.icon-sina:hover{ color:#d32f2f;}
 .imgCode{ position:relative;}
-#imgCode img{ position:absolute; top:1px; right:1px; cursor:pointer;}
+#imgCode input[type="button"]{ position:absolute; top:1px; right:1px; cursor:pointer;}
+#code {
+    font-family: Arial;
+    font-style: italic;
+    font-weight: bold;
+    border: 0;
+    letter-spacing: 2px;
+    color: blue;
+    position: relative;
+    cursor: pointer;
+    background-color: #e6e6e6;
+}
+
 /*用户等级*/
 .layui-table-view .layui-table span.seraph{ font-size:25px !important;}
 .vip1{ color:#994a2b;}
