@@ -6,7 +6,9 @@ function dateFilter(date){
     if(date < 10){return "0"+date;}
     return date;
 }
+
 function getLangDate(){
+    var accountInfo = JSON.parse(sessionStorage.getItem("accountInfo"));
     var dateObj = new Date(); //表示当前系统时间的Date对象
     var year = dateObj.getFullYear(); //当前系统时间的完整年份值
     var month = dateObj.getMonth()+1; //当前系统时间的月份值
@@ -19,7 +21,7 @@ function getLangDate(){
     var second = dateObj.getSeconds(); //当前系统时间的秒钟值
     var timeValue = "" +((hour >= 12) ? (hour >= 18) ? "晚上" : "下午" : "上午" ); //当前时间属于上午、晚上还是下午
     newDate = dateFilter(year)+"年"+dateFilter(month)+"月"+dateFilter(date)+"日 "+" "+dateFilter(hour)+":"+dateFilter(minute)+":"+dateFilter(second);
-    document.getElementById("nowTime").innerHTML = "亲爱的驊驊龔頾，"+timeValue+"好！ 欢迎使用layuiCMS 2.0模版。当前时间为： "+newDate+"　"+week;
+    document.getElementById("nowTime").innerHTML = accountInfo.name+"，"+timeValue+"好！ 欢迎使用高校成绩管理系统。当前时间为： "+newDate+"　"+week;
     setTimeout("getLangDate()",1000);
 }
 
@@ -28,8 +30,6 @@ layui.use(['form','element','layer','jquery'],function(){
         layer = parent.layer === undefined ? layui.layer : top.layer,
         element = layui.element;
         $ = layui.jquery;
-    //上次登录时间【此处应该从接口获取，实际使用中请自行更换】
-    $(".loginTime").html(newDate.split("日")[0]+"日</br>"+newDate.split("日")[1]);
     //icon动画
     $(".panel a").hover(function(){
         $(this).find(".layui-anim").addClass("layui-anim-scaleSpring");
@@ -39,20 +39,6 @@ layui.use(['form','element','layer','jquery'],function(){
     $(".panel a").click(function(){
         parent.addTab($(this));
     })
-    //系统基本参数
-    if(window.sessionStorage.getItem("systemParameter")){
-        var systemParameter = JSON.parse(window.sessionStorage.getItem("systemParameter"));
-        fillParameter(systemParameter);
-    }else{
-        $.ajax({
-            url : "../json/systemParameter.json",
-            type : "get",
-            dataType : "json",
-            success : function(data){
-                fillParameter(data);
-            }
-        })
-    }
     //填充数据方法
     function fillParameter(data){
         //判断字段数据是否存在
@@ -63,36 +49,14 @@ layui.use(['form','element','layer','jquery'],function(){
                 return data;
             }
         }
-        $(".version").text(nullData(data.version));      //当前版本
-        $(".author").text(nullData(data.author));        //开发作者
-        $(".homePage").text(nullData(data.homePage));    //网站首页
-        $(".server").text(nullData(data.server));        //服务器环境
-        $(".dataBase").text(nullData(data.dataBase));    //数据库版本
-        $(".maxUpload").text(nullData(data.maxUpload));    //最大上传限制
-        $(".userRights").text(nullData(data.userRights));//当前用户权限
     }
-
-    //最新文章列表
-    $.get("../json/newsList.json",function(data){
-        var hotNewsHtml = '';
-        for(var i=0;i<5;i++){
-            hotNewsHtml += '<tr>'
-                +'<td align="left"><a href="javascript:;"> '+data.data[i].newsName+'</a></td>'
-                +'<td>'+data.data[i].newsTime.substring(0,10)+'</td>'
-                +'</tr>';
-        }
-        $(".hot_news").html(hotNewsHtml);
-        $(".userAll span").text(data.length);
-    })
-
-    //用户数量
-    $.get("../json/userList.json",function(data){
-        $(".userAll span").text(data.count);
-    })
-
-    //外部图标
-    $.get(iconUrl,function(data){
-        $(".outIcons span").text(data.split(".icon-").length-1);
-    })
-
 })
+var accountInfo = JSON.parse(sessionStorage.getItem("accountInfo"));
+    var identity = sessionStorage.getItem("identity");
+    var vue = new Vue({
+        el:"#main",
+        data:{
+            account:accountInfo,
+            identity:identity
+        }
+    });

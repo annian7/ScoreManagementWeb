@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>友情链接--layui后台管理模板 2.0</title>
+	<title>教师列表</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="../../css/public.css" media="all" />
 </head>
 <body class="childrenBody">
+<form class="layui-form">
 	<blockquote class="layui-elem-quote quoteBox">
 		<form class="layui-form">
 			<div class="layui-inline">
@@ -22,16 +23,19 @@
 				<a class="layui-btn search_btn" data-type="reload">搜索</a>
 			</div>
 			<div class="layui-inline">
-				<a class="layui-btn layui-btn-normal addLink_btn">添加友链</a>
-			</div>
-			<div class="layui-inline">
-				<a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn">批量删除</a>
+				<a class="layui-btn layui-btn-normal addNews_btn">添加教师</a>
 			</div>
 		</form>
 	</blockquote>
-	<table id="linkList" lay-filter="linkList"></table>
+	<table id="userList" lay-filter="userList"></table>
 
-	<script type="text/javascript" src="../../layui/layui.js"></script>
-	<script type="text/javascript" src="linkList.js"></script>
+	<!--操作-->
+	<script type="text/html" id="userListBar">
+		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+		<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+	</script>
+</form>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="userList.js"></script>
 </body>
 </html>

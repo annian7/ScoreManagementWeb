@@ -11,19 +11,32 @@ layui.use(['form','layer','jquery'],function(){
 
     //登录按钮
     form.on("submit(login)",function(data){
-        $(this).text("登录中...");
         var articleFrom = data.field;
-        // alert(JSON.stringify(articleFrom))
+        var identity="";
+        if(articleFrom.code.toUpperCase()!=articleFrom.codeText.toUpperCase()){
+            layer.msg("验证码错误，请重新输入",{time:1000});
+            return false;
+        }
+        if(articleFrom.identity==1){
+            identity = "student";
+        }else if(articleFrom.identity==2){
+            identity = "teacher";
+        }else{
+            identity = "admin";
+        }
+
         $.ajax({
             type:"GET",
-            url:"http://localhost:9000/web/CustomerController/login",
+            url:"http://localhost:8080/ScoreManagement_war_exploded/"+identity+"/login.action",
             data:{
-                phone:articleFrom.id,
-                pCode:articleFrom.password
+                "id":articleFrom.id,
+                "password":articleFrom.password
             },
             dataType:"JSON",
             success:function(data) {
-                if(data.success=="false"){
+                sessionStorage.setItem("accountInfo",JSON.stringify(data));
+                sessionStorage.setItem("identity",articleFrom.identity);
+                if(data.name==""||data.name==null){
                     layer.msg("用户名或密码错误",{time:1000});
                 }else if(data.success=="ok"){
                     setTimeout(function(){
@@ -34,11 +47,11 @@ layui.use(['form','layer','jquery'],function(){
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrow) {
-                alert("error");
+                layer.msg("系统繁忙，请稍后再试",{time:1000});
                 debugger;
-                alert(XMLHttpRequest.status);
-                alert(XMLHttpRequest.readyState);
-                alert(textStatus);
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
             }
         });
         return false;

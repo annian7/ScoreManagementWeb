@@ -4,6 +4,15 @@ layui.config({
 }).extend({
 	"bodyTab" : "bodyTab"
 })
+var accountInfo = JSON.parse(sessionStorage.getItem("accountInfo"));
+var identity = sessionStorage.getItem("identity");
+var vue = new Vue({
+	el:"#navigation",
+	data:{
+		account:accountInfo,
+		identity:identity
+	}
+});
 layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	var form = layui.form,
 		element = layui.element;
@@ -23,10 +32,6 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 				tab.render();
 			}else if(json == "memberCenter"){
 				dataStr = data.memberCenter;
-				//重新渲染左侧菜单
-				tab.render();
-			}else if(json == "systemeSttings"){
-				dataStr = data.systemeSttings;
 				//重新渲染左侧菜单
 				tab.render();
 			}else if(json == "seraphApi"){
@@ -83,17 +88,6 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 		$(this).parent("li").siblings().removeClass("layui-nav-itemed");
 	})
 
-	//清除缓存
-	$(".clearCache").click(function(){
-		window.sessionStorage.clear();
-        window.localStorage.clear();
-        var index = layer.msg('清除缓存中，请稍候',{icon: 16,time:false,shade:0.8});
-        setTimeout(function(){
-            layer.close(index);
-            layer.msg("缓存清除成功！");
-        },1000);
-    })
-
 	//刷新后还原打开的窗口
     if(cacheStr == "true") {
         if (window.sessionStorage.getItem("menu") != null) {
@@ -139,29 +133,4 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 //打开新窗口
 function addTab(_this){
 	tab.tabAdd(_this);
-}
-
-//捐赠弹窗
-function donation(){
-	layer.tab({
-		area : ['260px', '367px'],
-		tab : [{
-			title : "微信",
-			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='images/wechat.jpg'></div>"
-		},{
-			title : "支付宝",
-			content : "<div style='padding:30px;overflow:hidden;background:#d2d0d0;'><img src='images/alipay.jpg'></div>"
-		}]
-	})
-}
-
-//图片管理弹窗
-function showImg(){
-    $.getJSON('json/images.json', function(json){
-        var res = json;
-        layer.photos({
-            photos: res,
-            anim: 5
-        });
-    });
 }

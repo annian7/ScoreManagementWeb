@@ -1,7 +1,7 @@
 //产生验证码  
             window.onload = function() {
                 createCode();
-                var timeDiv = document.getElementById("time");
+                var timeDiv = document.getElementById("code");
                 window.setInterval(function(){
                     timeDiv.innerHTML = new Date().toLocaleString();
                 }, 1000);

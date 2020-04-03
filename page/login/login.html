@@ -13,10 +13,17 @@
 	<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
 	<link rel="stylesheet" href="../../css/public.css" media="all" />
 	<script src="log_code.js"></script>
+	
 </head>
 <body class="loginBody">
 	<form class="layui-form" style="padding-top: 50px;">
-		<!-- <div class="login_face"><img src="../../images/face.jpg" class="userAvatar"></div> -->
+		<div class="layui-form-item">
+			<select name="identity" lay-filter="aihao">
+			  <option value="1">学生登陆</option>
+			  <option value="2">教师登陆</option>
+			  <option value="3">管理员登陆</option>
+			</select>
+		</div>
 		<div class="layui-form-item input-item">
 			<label for="userName">用户名</label>
 			<input type="text" placeholder="请输入用户名" autocomplete="off" id="userName" name="id" class="layui-input" lay-verify="required">
@@ -27,9 +34,9 @@
 		</div>
 		<div class="layui-form-item input-item" id="imgCode">
 			<label for="code">验证码</label>
-			<input type="text" placeholder="请输入验证码" autocomplete="off" id="codeText" name="code" class="layui-input">
+			<input type="text" placeholder="请输入验证码" autocomplete="off" id="codeText" name="codeText" class="layui-input" lay-verify="required">
 			<!-- <img src="../../images/code.jpg"> -->
-			<input class="layui-btn layui-btn-primary" type="button" id="code" onclick="createCode()" />
+			<input class="layui-btn layui-btn-primary" type="button" id="code" name="code" onclick="createCode()" />
 		</div>
 		<div class="layui-form-item">
 			<button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
@@ -42,6 +49,5 @@
 	</form>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
 	<script type="text/javascript" src="login.js"></script>
-	<script type="text/javascript" src="../../js/cache.js"></script>
 </body>
 </html>
