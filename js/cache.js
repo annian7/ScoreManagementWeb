@@ -8,7 +8,7 @@ layui.use(['form','jquery',"layer"],function() {
     //判断是否是登陆状态
     var accountInfo = sessionStorage.getItem("accountInfo");
         if(accountInfo==null){
-            window.location.href = "/ScoreManagementWeb/page/login/login.html";
+            window.location.href = "/page/login/login.html";
         }
     //判断是否web端打开
     if(!/http(s*):\/\//.test(location.href)){
@@ -28,5 +28,7 @@ layui.use(['form','jquery',"layer"],function() {
         window.sessionStorage.removeItem("menu");
         menu = [];
         window.sessionStorage.removeItem("curmenu");
+        window.sessionStorage.removeItem("accountInfo");
+        window.sessionStorage.removeItem("identity");
     })
 })

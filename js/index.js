@@ -134,3 +134,4 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 function addTab(_this){
 	tab.tabAdd(_this);
 }
+
