@@ -29,9 +29,15 @@
 			</div>
 		</div>
 		<div class="layui-form-item">
+			<label class="layui-form-label">学院</label>
+			<div class="layui-input-block">
+				<input type="text" v-bind:value="account.college.name" disabled class="layui-input layui-disabled">
+			</div>
+		</div>
+		<div class="layui-form-item">
 			<label class="layui-form-label">真实姓名</label>
 			<div class="layui-input-block">
-				<input type="text" v-model="account.name"  placeholder="请输入真实姓名" lay-verify="required" class="layui-input realName">
+				<input type="text" v-bind:value="account.name" placeholder="请输入真实姓名"  lay-verify="required" class="layui-input realName">
 			</div>
 		</div>
 		<div class="layui-form-item" pane="">
@@ -45,26 +51,25 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">手机号码</label>
 			<div class="layui-input-block">
-				<input type="tel" v-model="account.tel" placeholder="请输入手机号码" lay-verify="phone" class="layui-input userPhone">
+				<input type="tel" v-bind:value="account.tel" placeholder="请输入手机号码" lay-verify="phone" class="layui-input userPhone">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">出生年月</label>
 			<div class="layui-input-block">
-				<input type="text" v-model="account.birthday" placeholder="请输入出生年月" lay-verify="userBirthday" readonly class="layui-input userBirthday">
+				<input type="text" v-bind:value="account.birthday" placeholder="请输入出生年月" lay-verify="userBirthday" readonly class="layui-input userBirthday">
 			</div>
 		</div>
 		
 		<div class="layui-form-item">
 			<label class="layui-form-label">邮箱</label>
 			<div class="layui-input-block">
-				<input type="text" v-model="account.email" placeholder="请输入邮箱" lay-verify="email" class="layui-input userEmail">
+				<input type="text" v-bind:value="account.email" placeholder="请输入邮箱" lay-verify="email" class="layui-input userEmail">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit="" lay-filter="changeUser">立即提交</button>
-				<!-- <button type="reset" class="layui-btn layui-btn-primary">重置</button> -->
 			</div>
 		</div>
 	</div>

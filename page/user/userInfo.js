@@ -5,10 +5,12 @@ layui.config({
     "address" : "address"
 })
 var accountInfo = JSON.parse(sessionStorage.getItem("accountInfo"));
+// alert(JSON.stringify(accountInfo))
+var test1 = accountInfo.shift;
 var vue = new Vue({
 	el:"#userInfo",
 	data:{
-		account:accountInfo
+        account:accountInfo
 	}
 });
 layui.use(['form','layer','upload','laydate',"address"],function(){
@@ -52,7 +54,7 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
         }
         $.ajax({
             type:"POST",
-            url:"http://localhost:8080/ScoreManagement_war_exploded/"+url+"/updateAdmin.action",
+            url:"http://localhost:8080/ScoreManagement_war_exploded/"+url+"/update.action",
             data:{
                 'id' : $(".adminId").val(),
                 'name' : $(".realName").val(),
