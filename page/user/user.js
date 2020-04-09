@@ -1,3 +1,16 @@
+var accountInfo = JSON.parse(sessionStorage.getItem("accountInfo"));
+var identity = sessionStorage.getItem("identity");
+//alert(JSON.stringify(accountInfo))
+var vue = new Vue({
+    el: "#userpassword",
+    data: {
+        account: accountInfo,
+        identity: identity,
+
+    }
+});
+
+
 layui.use(['form','layer','laydate','table','laytpl'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -5,25 +18,77 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         laydate = layui.laydate,
         laytpl = layui.laytpl,
         table = layui.table;
-
+      var password3 = $("#password3").val(); //获取旧密码的值
+      var password2 = $("#password2").val(); //获取旧密码的值
+      var usercode=$("#usercode").val();
+       var oldPwd2 = $("#oldPwd").val(); //获取旧密码的值
+     
+   
     //添加验证规则
     form.verify({
-        oldPwd : function(value, item){
-            if(value != "123456"){
+        oldPwd : function(value2, item){
+           
+            
+            if (value2!=password3) {
                 return "密码错误，请重新输入！";
             }
+          
         },
+     
         newPwd : function(value, item){
             if(value.length < 6){
                 return "密码长度不能小于6位";
             }
         },
         confirmPwd : function(value, item){
+             var oldPwd2 = $("#oldPwd").val(); //获取旧密码的值
+            //  alert(oldPwd2)
             if(!new RegExp($("#oldPwd").val()).test(value)){
                 return "两次输入密码不一致，请重新输入！";
             }
+            // alert(usercode);
+            // alert(oldPwd2);
+            var identity = sessionStorage.getItem("identity");
+            
+            var url = "";
+            if (identity == 1) {
+                url = "student";
+            } else if (identity == 2) {
+                url = "teacher";
+            } else {
+                url = "admin";
+            }
+             $.ajax({
+                 type: "get",
+                 async:false,
+                 url: "http://localhost:8080/ScoreManagement_war_exploded/" + url + "/updatePassword.action",
+        
+                 data: {
+                     "id": usercode,
+                     "password": oldPwd2
+                 },
+                 dataType: "JSON",
+                 success: function (data) {
+                    if(data.success=="ok"){
+                        layer.msg("修改成功")
+                    }
+                 },
+                 error: function (XMLHttpRequest, textStatus, errorThrow) {
+                     layer.close(index);
+                     layer.msg("系统繁忙，请稍后再试", {
+                         time: 1000
+                     });
+                     debugger;
+                     console.log(XMLHttpRequest.status);
+                     console.log(XMLHttpRequest.readyState);
+                     console.log(textStatus);
+                 }
+             });
         }
+        
     })
+ 
+    
 
     //用户等级
     table.render({
