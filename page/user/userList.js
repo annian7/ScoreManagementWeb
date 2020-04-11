@@ -1,4 +1,4 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.use(['form','layer','table','laytpl'],function(){ 
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
@@ -8,23 +8,42 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
-        url : '../../json/userList.json',
+        url : 'http://localhost:8080/ScoreManagement_war_exploded/student/queryPage.action',
+        parseData: function(res){ //res 即为原始返回的数据
+            return {
+              "code": 0, //解析接口状态
+              "msg": "", //解析提示文本
+              "count": res.count, //解析数据长度
+              "data": res.data //解析数据列表
+            };
+          },
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
-        limit : 20,
+        limit : 5,
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'userName', title: '职工号', minWidth:100, align:"center"},
-            {field: 'userEmail', title: '用户邮箱', minWidth:200, align:'center',templet:function(d){
-                return '<a class="layui-blue" href="mailto:'+d.userEmail+'">'+d.userEmail+'</a>';
+            {field: 'id', title: '职工号', minWidth:100, align:"center"},
+            {field: 'name', title: '姓名', minWidth:100, align:"center"},
+            {field: 'shift', title: '班级', minWidth:100, align:"center",
+                templet: function(d){
+                    return d.shift.major.name+d.shift.no
+                }
+        },
+            {field: 'email', title: '邮箱', minWidth:200, align:'center',templet:function(d){
+                return '<a class="layui-blue" href="mailto:'+d.email+'">'+d.email+'</a>';
             }},
-            {field: 'userSex', title: '用户性别', align:'center'},
-            {field: 'userEndTime', title: '最后登录时间', align:'center',minWidth:150},
+            {field: 'sex', title: '用户性别', align:'center',
+                templet: function(d){
+                    if(d.sex == '1'){
+                    return '男'
+                    } else { return '女'}
+            }
+        },
             {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
-        ]]
+        ]],
     });
 
     //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
