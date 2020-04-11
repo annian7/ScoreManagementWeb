@@ -21,11 +21,11 @@ layui.use(['form','layer','table','laytpl'],function(){
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
-        limit : 5,
+        limit : 10,
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'id', title: '职工号', minWidth:100, align:"center"},
+            {field: 'id', title: '学号', minWidth:100, align:"center"},
             {field: 'name', title: '姓名', minWidth:100, align:"center"},
             {field: 'shift', title: '班级', minWidth:100, align:"center",
                 templet: function(d){
@@ -42,7 +42,7 @@ layui.use(['form','layer','table','laytpl'],function(){
                     } else { return '女'}
             }
         },
-            {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
+            {title: '操作', minWidth:200, templet:'#userListBar',fixed:"right",align:"center"}
         ]],
     });
 
