@@ -31,17 +31,28 @@ layui.use(['form','layer','table','laytpl'],function(){
                 templet: function(d){
                     return d.college.name
                 }
-        },
-            {field: 'email', title: '邮箱', minWidth:200, align:'center',templet:function(d){
-                return '<a class="layui-blue" href="mailto:'+d.email+'">'+d.email+'</a>';
-            }},
-            {field: 'sex', title: '用户性别', align:'center',
+            },
+            {field: 'sex', title: '性别', align:'center',
                 templet: function(d){
                     if(d.sex == '1'){
                     return '男'
                     } else { return '女'}
-            }
-        },
+                }
+            },
+            {field: 'email', title: '邮箱', align:'center',templet:function(d){
+                if(d.email!=null&&d.email!=""){
+                    return '<a class="layui-blue" href="mailto:'+d.email+'">'+d.email+'</a>';
+                }else{
+                    return "无";
+                }
+            }},
+            {field: 'tel', title: '手机号', align:'center',templet:function(d){
+                if(d.tel!=null&&d.tel!=""){
+                    return d.tel;
+                }else{
+                    return "无";
+                }
+            }},
             {title: '操作', minWidth:200, templet:'#userListBar',fixed:"right",align:"center"}
         ]],
     });

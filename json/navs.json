@@ -23,7 +23,7 @@
 		{
 			"title": "学生管理",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/user/teacherList.html",
 			"spread": false
 		}
 	]

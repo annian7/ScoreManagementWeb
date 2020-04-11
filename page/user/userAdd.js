@@ -49,15 +49,6 @@ laydate.render({
     max: 0
 });
     form.on("submit(addUser)", function (data) {
-        var url = "";
-        if (identity == 1) {
-            url = "student";
-        } else if (identity == 2) {
-            url = "teacher";
-        } else {
-            url = "admin";
-        }
-
         // var radio = $('input:radio[name="sex"]:checked').val() 获取性别
         var studentId = $("#studentId").val()
         var studentName = $("#studentName").val()
@@ -67,11 +58,9 @@ laydate.render({
         var email = $("#email").val()
         var radio = data.field.sex//获取性别
         var userGrade = data.field.userGrade//获取classid
-        alert(userGrade)
-        alert(radio)
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候', { icon: 16, time: false, shade: 0.8 });
-        axios.get(  'http://localhost:8080/ScoreManagement_war_exploded/'+url+'/addStudent.action', {
+        axios.get(  'http://localhost:8080/ScoreManagement_war_exploded/admin/addStudent.action', {
             params: {
                 id: studentId,
                 password: studentPassword,
@@ -96,9 +85,10 @@ laydate.render({
         setTimeout(function () {
             top.layer.close(index);
             top.layer.msg("用户添加成功！");
-            layer.closeAll("iframe");
             //刷新父页面
             parent.location.reload();
+            layer.closeAll("iframe");
+            
         }, 2000);
         return false;
 
