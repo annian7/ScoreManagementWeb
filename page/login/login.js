@@ -27,7 +27,8 @@ layui.use(['form','layer','jquery'],function(){
 
         $.ajax({
             type:"GET",
-            url:"http://localhost:8080/ScoreManagement_war_exploded/"+identity+"/login.action",
+           url:"http://localhost:8080/ScoreManagement_war_exploded/"+identity+"/login.action",
+            
             data:{
                 "id":articleFrom.id,
                 "password":articleFrom.password
