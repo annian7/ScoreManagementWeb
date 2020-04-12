@@ -1,15 +1,6 @@
-var accountInfo = JSON.parse(sessionStorage.getItem("accountInfo"));
-var identity = sessionStorage.getItem("identity");
-//alert(JSON.stringify(accountInfo))
-var vue = new Vue({
-    el: "#userAdd",
-    data: {
-        account: accountInfo,
-        identity: identity,
 
-    }
-});
 layui.use(['form', 'laydate','layer'], function () {
+
     var form = layui.form,
       laydate = layui.laydate,
     layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -73,7 +64,6 @@ laydate.render({
             }
         })
             .then(function (response) {
-
                 console.log(response);
             })
             .catch(function (error) {
@@ -108,13 +98,34 @@ laydate.render({
     var submitTime = time.getFullYear() + '-' + filterTime(time.getMonth() + 1) + '-' + filterTime(time.getDate()) + ' ' + filterTime(time.getHours()) + ':' + filterTime(time.getMinutes()) + ':' + filterTime(time.getSeconds());
 
 })
-//班级
-for (var i = 1; i < 20; i++) {
-    var newOption = document.createElement("option");
-    newOption.text = i;
-    newOption.value = i;
-    document.getElementById("class_id").add(newOption);
-}
+
+//查询所有班级
+$.ajax({
+    type:"GET",
+   url:"http://localhost:8080/ScoreManagement_war_exploded/class/queryAll.action",
+    dataType:"JSON",
+    success:function(data) {
+        alert(JSON.stringify(data))
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrow) {
+        layer.msg("系统繁忙，请稍后再试",{time:1000});
+        debugger;
+        console.log(XMLHttpRequest.status);
+        console.log(XMLHttpRequest.readyState);
+        console.log(textStatus);
+    }
+});
+
+
+    for (var i = 1; i<20; i++) {
+        var newOption = document.createElement("option");
+        newOption.text = i;
+        newOption.value = i;
+        document.getElementById("class_id").add(newOption);
+    }
+
+
+
 
 
 
