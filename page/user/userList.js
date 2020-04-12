@@ -1,4 +1,4 @@
-layui.use(['form','layer','table','laytpl'],function(){
+layui.use(['form','layer','table','laytpl'],function(){ 
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
@@ -8,23 +8,53 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
-        url : '../../json/userList.json',
+        url : 'http://localhost:8080/ScoreManagement_war_exploded/student/queryPage.action',
+        parseData: function(res){ //res 即为原始返回的数据
+            return {
+              "code": 0, //解析接口状态
+              "msg": "", //解析提示文本
+              "count": res.count, //解析数据长度
+              "data": res.data //解析数据列表
+            };
+          },
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limits : [10,15,20,25],
-        limit : 20,
+        limit : 10,
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'userName', title: '职工号', minWidth:100, align:"center"},
-            {field: 'userEmail', title: '用户邮箱', minWidth:200, align:'center',templet:function(d){
-                return '<a class="layui-blue" href="mailto:'+d.userEmail+'">'+d.userEmail+'</a>';
+            {field: 'id', title: '学号', minWidth:100, align:"center"},
+            {field: 'name', title: '姓名', minWidth:100, align:"center"},
+            {field: 'shift', title: '班级', minWidth:100, align:"center",
+                templet: function(d){
+                    return d.shift.major.name+d.shift.no
+                }
+            },
+            {field: 'sex', title: '用户性别', align:'center',
+                templet: function(d){
+                    if(d.sex == '1'){
+                    return '男'
+                    } else { return '女'}
+                }
+            },
+            {field: 'email', title: '邮箱', align:'center',templet:function(d){
+                if(d.email!=null&&d.email!=""){
+                    return '<a class="layui-blue" href="mailto:'+d.email+'">'+d.email+'</a>';
+                }else{
+                    return "无";
+                }
             }},
-            {field: 'userSex', title: '用户性别', align:'center'},
-            {field: 'userEndTime', title: '最后登录时间', align:'center',minWidth:150},
-            {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
-        ]]
+            {field: 'tel', title: '手机号', align:'center',templet:function(d){
+                if(d.tel!=null&&d.tel!=""){
+                    return d.tel;
+                }else{
+                    return "无";
+                }
+            }},
+            {title: '操作', minWidth:200, templet:'#userListBar',fixed:"right",align:"center"}
+        ]],
     });
 
     //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
@@ -50,16 +80,7 @@ layui.use(['form','layer','table','laytpl'],function(){
             type : 2,
             content : "userAdd.html",
             success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-                if(edit){
-                    body.find(".userName").val(edit.userName);  //登录名
-                    body.find(".userEmail").val(edit.userEmail);  //邮箱
-                    body.find(".userSex input[value="+edit.userSex+"]").prop("checked","checked");  //性别
-                    body.find(".userGrade").val(edit.userGrade);  //会员等级
-                    body.find(".userStatus").val(edit.userStatus);    //用户状态
-                    body.find(".userDesc").text(edit.userDesc);    //用户简介
-                    form.render();
-                }
+                // var body = layui.layer.getChildFrame('body', index);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -85,26 +106,6 @@ layui.use(['form','layer','table','laytpl'],function(){
 
         if(layEvent === 'edit'){ //编辑
             addUser(data);
-        }else if(layEvent === 'usable'){ //启用禁用
-            var _this = $(this),
-                usableText = "是否确定禁用此用户？",
-                btnText = "已禁用";
-            if(_this.text()=="已禁用"){
-                usableText = "是否确定启用此用户？",
-                btnText = "已启用";
-            }
-            layer.confirm(usableText,{
-                icon: 3,
-                title:'系统提示',
-                cancel : function(index){
-                    layer.close(index);
-                }
-            },function(index){
-                _this.text(btnText);
-                layer.close(index);
-            },function(index){
-                layer.close(index);
-            });
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
                 // $.get("删除文章接口",{
