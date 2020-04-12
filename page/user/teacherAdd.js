@@ -67,8 +67,8 @@ layui.use(['form', 'laydate', 'layer'], function () {
         var email = $("#email").val()
         var radio = data.field.sex //获取性别
         var userGrade = data.field.userGrade //获取classid
-        alert(userGrade)
-        alert(radio)
+        // alert(userGrade)
+        // alert(radio)
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候', {
             icon: 16,
@@ -78,8 +78,8 @@ layui.use(['form', 'laydate', 'layer'], function () {
         axios.get('http://localhost:8080/ScoreManagement_war_exploded/' + url + '/addTeacher.action', {
                 params: {
                     id: teacherId,
-                    password: teacherName,
-                    name: teacherPassword,
+                    password: teacherPassword,
+                    name: teacherName,
                     sex: radio,
                     birthday: birthday,
                     tel: tel,
