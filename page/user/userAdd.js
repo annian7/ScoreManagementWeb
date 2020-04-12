@@ -108,7 +108,7 @@ laydate.render({
     var submitTime = time.getFullYear() + '-' + filterTime(time.getMonth() + 1) + '-' + filterTime(time.getDate()) + ' ' + filterTime(time.getHours()) + ':' + filterTime(time.getMinutes()) + ':' + filterTime(time.getSeconds());
 
 })
-//半机
+//班级
 for (var i = 1; i < 20; i++) {
     var newOption = document.createElement("option");
     newOption.text = i;
