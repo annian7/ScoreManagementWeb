@@ -48,9 +48,9 @@ laydate.render({
 });
     form.on("submit(addUser)", function (data) {
         // var radio = $('input:radio[name="sex"]:checked').val() 获取性别
-        var studentId = $("#studentId").val()
-        var studentName = $("#studentName").val()
-        var studentPassword = $("#studentPassword").val()
+        var teacherId = $("#teacherId").val()
+        var teacherName = $("#teacherName").val()
+        var teacherPassword = $("#teacherPassword").val()
         var birthday = $("#birthday").val()
         var tel = $("#tel").val()
         var email = $("#email").val()
@@ -58,16 +58,16 @@ laydate.render({
         var userGrade = data.field.userGrade//获取classid
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候', { icon: 16, time: false, shade: 0.8 });
-        axios.get(  'http://localhost:8080/ScoreManagement_war_exploded/admin/addStudent.action', {
+        axios.get('http://localhost:8080/ScoreManagement_war_exploded/admin/addTeacher.action', {
             params: {
-                id: studentId,
-                password: studentPassword,
-                name: studentName,
+                id: teacherId,
+                password: teacherPassword,
+                name: teacherName,
                 sex: radio,
                 birthday: birthday,
                 tel: tel,
                 email: email,
-                classId: userGrade
+                collegeId: userGrade
             }
         })
             .then(function (response) {
@@ -105,7 +105,43 @@ laydate.render({
     var submitTime = time.getFullYear() + '-' + filterTime(time.getMonth() + 1) + '-' + filterTime(time.getDate()) + ' ' + filterTime(time.getHours()) + ':' + filterTime(time.getMinutes()) + ':' + filterTime(time.getSeconds());
 
 })
-//半机
+
+
+//查询所有班级
+
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8080/ScoreManagement_war_exploded/class/queryAll.action",
+    dataType: "JSON",
+    async: false,
+    success: function (data, item) {
+        // alert(JSON.stringify(data))
+        for (var item = 0; item < data.length; item++) {
+            var newOption = document.createElement("option");
+            //  console.log(data[item].id + "学生id")
+            //  console.log(data[item].major.name + "学生major")
+            //  console.log(data[item].no);
+            newOption.text = data[item].major.name + data[item].no;
+            //   newOption.value = data[item].major.name + data[item].no;
+            newOption.value = data[item].id;
+            document.getElementById("class_id").add(newOption);
+            // console.log(newOption.value)
+
+        }
+
+
+    },
+    error: function (XMLHttpRequest, textStatus, errorThrow) {
+        layer.msg("系统繁忙，请稍后再试", {
+            time: 1000
+        });
+        debugger;
+        console.log(XMLHttpRequest.status);
+        console.log(XMLHttpRequest.readyState);
+        console.log(textStatus);
+    }
+});
+//
 // for (var i = 1; i < 20; i++) {
 //     var newOption = document.createElement("option");
 //     newOption.text = i;
