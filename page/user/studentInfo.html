@@ -31,7 +31,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">班级</label>
 			<div class="layui-input-block">
-				<input type="text" v-bind:value="account.shift.major.name+account.shift.id" disabled class="layui-input layui-disabled">
+				<input type="text"  v-bind:value="account.shift.major.name+account.shift.no" disabled class="layui-input layui-disabled">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -57,7 +57,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">出生年月</label>
 			<div class="layui-input-block">
-				<input type="text" v-bind:value="account.birthday" placeholder="请输入出生年月" lay-verify="userBirthday" readonly class="layui-input birthday">
+				<input type="text" v-bind:value="account.birthday" placeholder="请输入出生年月" lay-verify="birthday" readonly class="layui-input birthday">
 			</div>
 		</div>
 		

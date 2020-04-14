@@ -1,12 +1,10 @@
 var accountInfo = JSON.parse(sessionStorage.getItem("accountInfo"));
 var identity = sessionStorage.getItem("identity");
-//alert(JSON.stringify(accountInfo))
 var vue = new Vue({
     el: "#changePsw",
     data: {
         account: accountInfo,
         identity: identity,
-     
     }
 });
 

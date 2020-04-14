@@ -35,11 +35,12 @@ layui.use(['form','layer','jquery'],function(){
             },
             dataType:"JSON",
             success:function(data) {
-                sessionStorage.setItem("accountInfo",JSON.stringify(data));
-                sessionStorage.setItem("identity",articleFrom.identity);
-                if(data.name==""||data.name==null){
+                
+                if(data.success=="false"){
                     layer.msg("用户名或密码错误",{time:1000});
                 }else if(data.success=="ok"){
+                    sessionStorage.setItem("accountInfo",JSON.stringify(data));
+                    sessionStorage.setItem("identity",articleFrom.identity);
                     setTimeout(function(){
                         window.location.href = "/index.html";
                     },1000);

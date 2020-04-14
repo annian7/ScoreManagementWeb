@@ -46,10 +46,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             if(!new RegExp($("#oldPwd").val()).test(value)){
                 return "两次输入密码不一致，请重新输入！";
             }
-            // alert(usercode);
-            // alert(oldPwd2);
             var identity = sessionStorage.getItem("identity");
-            
             var url = "";
             if (identity == 1) {
                 url = "student";
@@ -71,6 +68,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                  success: function (data) {
                     if(data.success=="ok"){
                         layer.msg("修改成功")
+                        sessionStorage.setItem("accountInfo",JSON.stringify(data));
                     }
                  },
                  error: function (XMLHttpRequest, textStatus, errorThrow) {

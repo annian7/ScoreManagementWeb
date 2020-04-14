@@ -173,12 +173,28 @@ layui.use(['form','layer','table','laytpl'],function(){
             edit(data);
         }else if(layEvent === 'del'){ //删除
             layer.confirm('确定删除此用户？',{icon:3, title:'提示信息'},function(index){
-                // $.get("删除文章接口",{
-                //     newsId : data.newsId  //将需要删除的newsId作为参数传入
-                // },function(data){
+                 $.get("http://localhost:8080/ScoreManagement_war_exploded/student/deleteStudent.action", {
+                    // newsId : data.newsId  //将需要删除的newsId作为参数传入
+                    id : data.id
+                 },function(data){
                     tableIns.reload();
+                    layer.msg("删除成功",{time:1000});
                     layer.close(index);
-                // })
+                })
+            });
+        } else if (layEvent === 'reset') { //重置
+            layer.confirm('密码重置后为123456!', {
+                icon: 3,
+                title: '提示信息'
+            }, function (index) {
+                $.get("http://localhost:8080/ScoreManagement_war_exploded/student/resetPassword.action?password", {
+                    
+                    id: data.id
+                }, function (data) {
+                    tableIns.reload();
+                    layer.msg("重置成功",{time:1000});
+                    layer.close(index);
+                })
             });
         }
     });
