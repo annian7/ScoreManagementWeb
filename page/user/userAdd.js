@@ -99,30 +99,6 @@ laydate.render({
 
 })
 
-//查询所有班级
-$.ajax({
-    type:"GET",
-   url:"http://localhost:8080/ScoreManagement_war_exploded/class/queryAll.action",
-    dataType:"JSON",
-    success:function(data) {
-        alert(JSON.stringify(data))
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrow) {
-        layer.msg("系统繁忙，请稍后再试",{time:1000});
-        debugger;
-        console.log(XMLHttpRequest.status);
-        console.log(XMLHttpRequest.readyState);
-        console.log(textStatus);
-    }
-});
-
-
-    for (var i = 1; i<20; i++) {
-        var newOption = document.createElement("option");
-        newOption.text = i;
-        newOption.value = i;
-        document.getElementById("class_id").add(newOption);
-    }
 
 
 
