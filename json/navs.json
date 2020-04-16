@@ -9,7 +9,7 @@
 		{
 			"title": "填报成绩",
 			"icon": "&#xe634;",
-			"href": "page/img/images.html",
+			"href": "page/grade/classList.html",
 			"spread": false
 		}
 	],
