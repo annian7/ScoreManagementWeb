@@ -27,18 +27,22 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	function getData(json){
 		$.getJSON(tab.tabConfig.url,function(data){
 			if(json == "contentManagement"){
-				dataStr = data.contentManagement;
+				var identity = sessionStorage.getItem("identity");
+				// alert(identity);
+				if(identity==3){
+					dataStr = data.adminManagement;
+				}else if(identity==1){
+					dataStr = data.studentManagement;
+				}else{ 
+					dataStr = data.contentManagement;
+				}
 				//重新渲染左侧菜单
 				tab.render();
 			}else if(json == "memberCenter"){
 				dataStr = data.memberCenter;
 				//重新渲染左侧菜单
 				tab.render();
-			}else if(json == "seraphApi"){
-                dataStr = data.seraphApi;
-                //重新渲染左侧菜单
-                tab.render();
-            }
+			}
 		})
 	}
 	//页面加载时判断左侧菜单是否显示

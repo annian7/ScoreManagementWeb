@@ -49,10 +49,6 @@ laydate.render({
         var email = $("#email").val()
         var radio = data.field.sex//获取性别
         var userGrade = data.field.userGrade //获取classid newOption.value
-       // var userGrade2 = newOption.value  这个值没有的  取不到 
-        alert(userGrade+"单独")
-       // alert(userGrade2)
-        //弹出loading
         var index = top.layer.msg('数据提交中，请稍候', { icon: 16, time: false, shade: 0.8 });
         axios.get(  'http://localhost:8080/ScoreManagement_war_exploded/admin/addStudent.action', {
             params: {
@@ -103,14 +99,10 @@ laydate.render({
 
 })
 
-<<<<<<< HEAD
-=======
-
 
 
 
 //查询所有班级
-  
   $.ajax({
         type: "GET",
         url: "http://localhost:8080/ScoreManagement_war_exploded/class/queryAll.action",
@@ -120,18 +112,10 @@ laydate.render({
            // alert(JSON.stringify(data))
               for (var item=0; item < data.length; item++) {
                 var newOption = document.createElement("option");
-                //  console.log(data[item].id + "学生id")
-                //  console.log(data[item].major.name + "学生major")
-                //  console.log(data[item].no);
                   newOption.text = data[item].major.name + data[item].no;
-                //   newOption.value = data[item].major.name + data[item].no;
                  newOption.value =  data[item].id;
                   document.getElementById("class_id").add(newOption);
-                 // console.log(newOption.value)
-                
               }
-           
-           
         },
         error: function (XMLHttpRequest, textStatus, errorThrow) {
             layer.msg("系统繁忙，请稍后再试", {
@@ -143,15 +127,6 @@ laydate.render({
             console.log(textStatus);
         }
     });
-
-    // for (var i = 1; i<20; i++) {
-    //     var newOption = document.createElement("option");
-    //     newOption.text = i;
-    //     newOption.value = i;
-    //     document.getElementById("class_id").add(newOption);
-    // }
->>>>>>> 9d9ecc28f752503406f2345a52d88466506a4a54
-
 
 
 

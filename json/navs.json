@@ -3,13 +3,35 @@
 		{
 			"title": "查看成绩",
 			"icon": "icon-text",
-			"href": "page/news/newsList.html",
+			"href": "page/grade/scoreList.html",
 			"spread": false
 		},
 		{
 			"title": "填报成绩",
 			"icon": "&#xe634;",
 			"href": "page/grade/classList.html",
+			"spread": false
+		}
+	],
+	"adminManagement": [
+		{
+			"title": "查看成绩",
+			"icon": "icon-text",
+			"href": "page/grade/scoreList.html",
+			"spread": false
+		},
+		{
+			"title": "修改成绩",
+			"icon": "icon-text",
+			"href": "page/grade/modifyScore.html",
+			"spread": false
+		}
+	],
+	"studentManagement": [
+		{
+			"title": "查看成绩",
+			"icon": "icon-text",
+			"href": "page/grade/studentScore.html",
 			"spread": false
 		}
 	],

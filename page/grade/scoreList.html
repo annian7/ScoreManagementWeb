@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>成绩列表</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+	<blockquote class="layui-elem-quote quoteBox">
+		<form class="layui-form">
+			<div class="layui-inline">
+				<div class="magb10 layui-col-md4 layui-col-xs12">
+					<label class="layui-form-label">班级编号</label>
+					<div class="layui-input-block">
+						<select name="userGrade" class="userGrade" lay-filter="userGrade" id="class_id"  onchange="cld()">
+						</select>
+					</div>
+				</div>
+				<div class="magb10 layui-col-md3 layui-col-xs12">
+					<label class="layui-form-label year">年选择器</label>
+					<div class="layui-input-block">
+					  <input type="text" class="layui-input" id="test2" placeholder="yyyy">
+					</div>
+				</div>
+				<div class="magb10 layui-col-md4 layui-col-xs12">
+					<label class="layui-form-label">学期</label>
+					<div class="layui-input-block">
+						<select name="phase" class="phase" lay-filter="phase" id="phase">
+							<option value="1">第一学期</option>
+							<option value="2">第二学期</option>
+						</select>	
+					</div>
+				</div>
+				<div class="magb10 layui-col-md4 layui-col-xs12">
+					<label class="layui-form-label">课程</label>
+					<div class="layui-input-block">
+						<select name="course" class="course" lay-filter="course" id="course">
+						</select>	
+					</div>
+				</div>
+				<a class="layui-btn search_btn" data-type="reload">搜索</a>
+			</div>
+		</form>
+	</blockquote>
+	<table id="scoreList" lay-filter="scoreList"></table>
+</form>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="scoreList.js"></script>
+</body>
+</html>

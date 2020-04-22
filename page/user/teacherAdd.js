@@ -111,22 +111,16 @@ laydate.render({
 
 $.ajax({
     type: "GET",
-    url: "http://localhost:8080/ScoreManagement_war_exploded/class/queryAll.action",
+    url: "http://localhost:8080/ScoreManagement_war_exploded/college/queryAll.action",
     dataType: "JSON",
     async: false,
     success: function (data, item) {
-        // alert(JSON.stringify(data))
+        console.log(data)
         for (var item = 0; item < data.length; item++) {
             var newOption = document.createElement("option");
-            //  console.log(data[item].id + "学生id")
-            //  console.log(data[item].major.name + "学生major")
-            //  console.log(data[item].no);
-            newOption.text = data[item].major.name + data[item].no;
-            //   newOption.value = data[item].major.name + data[item].no;
+            newOption.text = data[item].name;
             newOption.value = data[item].id;
             document.getElementById("class_id").add(newOption);
-            // console.log(newOption.value)
-
         }
 
 
@@ -141,13 +135,5 @@ $.ajax({
         console.log(textStatus);
     }
 });
-//
-// for (var i = 1; i < 20; i++) {
-//     var newOption = document.createElement("option");
-//     newOption.text = i;
-//     newOption.value = i;
-//     document.getElementById("class_id").add(newOption);
-// }
-
 
 
